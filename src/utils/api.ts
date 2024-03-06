@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 // API服务器地址
-export const apiURL = 'localhost:5000'
+export const apiURL = '172.31.6.65:5000'
 
 // 协议
 export const protocol = 'http'

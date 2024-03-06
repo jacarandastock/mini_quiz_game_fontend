@@ -16,7 +16,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 // https://vitejs.dev/config/
 export default defineConfig({
     base: process.env.DEPLOY_ENV === 'gh-pages'
-        ? '/garden_party_stock_game/'
+        ? '/mini_quiz_game_frontend/'
         : '/',
     plugins: [
         VueRouter({

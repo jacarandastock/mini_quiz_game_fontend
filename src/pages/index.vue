@@ -38,7 +38,7 @@ const socket = io(ioUrl, {
 })
 
 socket.on('connect', () => {
-  console.log('Connected to server')
+  // console.log('Connected to server')
 
 })
 
@@ -53,7 +53,7 @@ socket.on('change_question', () => {
 socket.on('started_update_data', async (data) => {
   disabled.value = true
   // 处理从服务器接收的数据更新
-  console.log('started_update_data: Received data update from server:', data)
+  // console.log('started_update_data: Received data update from server:', data)
   if (data['data'] === 'pending') {
     loading.value = true
     return
@@ -68,7 +68,7 @@ socket.on('started_update_data', async (data) => {
   gameData.value = data
   loading.value = false
   const response: any = await api.get('/answer')
-  console.log(response)
+  // console.log(response)
   if (response.data['submitted'] === false) {
     disabled.value = false
   }
@@ -97,14 +97,14 @@ socket.on('update_data', (data) => {
 //  {remaining_time: 660, stage: 1}
 socket.on('time_update', (data) => {
   // 处理从服务器接收的数据更新
-  console.log('Received data update from server:', data)
+  // console.log('Received data update from server:', data)
   // 更新本地状态
   gameData.value.remaining_time = data.remaining_time
   gameData.value.stage = data.stage
 })
 
 socket.on('disconnect', (reason) => {
-  console.log('Disconnected from server:', reason)
+  // console.log('Disconnected from server:', reason)
   // 处理自动重连
   setTimeout(() => {
       socket.connect()
@@ -120,7 +120,7 @@ function formatTime(time: number) {
 }
 
 async function answerQuestion(answer: string) {
-  console.log('Answer:', answer)
+  // console.log('Answer:', answer)
   const response = await api.post('/answer', { answer: answer, question: gameData.value.data })
   if (response.data['status'] === 'success') {
     disabled.value = true

@@ -122,7 +122,6 @@ function calculateScore(record: any) {
 
 <template>
   <v-container class="fill-height">
-
     <v-row>
       <v-col cols="12">
         <v-btn @click="startGame" class="mr-2">Game Start</v-btn>

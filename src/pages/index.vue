@@ -26,6 +26,7 @@ const gameData = ref<GameData>({
 const disabled = ref(false)
 const gameOver = ref(false)
 const rankListDialog = ref(false)
+const stage_answered = ref(false)
 
 // 创建Socket.IO连接
 const socket = io(ioUrl, {
@@ -43,6 +44,7 @@ socket.on('connect', () => {
 
 socket.on('change_question', () => {
   disabled.value = true
+  stage_answered.value = false
   getRankListDialog();
   setTimeout(() => {
     rankListDialog.value = false
@@ -75,7 +77,8 @@ socket.on('started_update_data', async (data) => {
 
 
 socket.on('update_data', (data) => {
-  disabled.value = false
+  disabled.value = !!stage_answered.value;
+
   // 处理从服务器接收的数据更新
   // console.log('Received data update from server:', data)
   if (data['data'] === 'pending') {
@@ -123,6 +126,7 @@ async function answerQuestion(answer: string) {
   const response = await api.post('/answer', { answer: answer, question: gameData.value.data })
   if (response.data['status'] === 'success') {
     disabled.value = true
+    stage_answered.value = true
   } else {
     alert('提交失败')
   }

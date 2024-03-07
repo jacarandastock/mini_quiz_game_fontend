@@ -20,6 +20,7 @@ export const ioUrl = `${wsProtocol}://${apiURL}`
 export function setToken(token: string) {
     // 将token 保存到localStorage中
     localStorage.setItem('token', token)
+    api.defaults.headers['Authorization'] = `Bearer ${token}`;
 }
 
 export function getToken(): string | null {

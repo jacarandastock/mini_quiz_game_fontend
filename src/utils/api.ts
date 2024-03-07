@@ -10,7 +10,6 @@ export const protocol = 'https';
 //
 // // 协议
 // export const protocol = 'http';
-
 export const wsProtocol = protocol === 'http' ? 'ws' : 'wss';
 
 

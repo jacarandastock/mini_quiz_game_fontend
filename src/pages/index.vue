@@ -8,7 +8,6 @@ import { io } from 'socket.io-client'
 const router = useRouter()
 const { t } = useI18n()
 
-const imageSrc = ref('https://cdn.devdojo.com/images/november2020/hero-image.jpeg')
 //  {data: 'What is the capital of Australia?', choice: Array(4), remaining_time: 941, stage: 1}
 type GameData = {
   data: string,
@@ -78,7 +77,7 @@ socket.on('started_update_data', async (data) => {
 socket.on('update_data', (data) => {
   disabled.value = false
   // 处理从服务器接收的数据更新
-  console.log('Received data update from server:', data)
+  // console.log('Received data update from server:', data)
   if (data['data'] === 'pending') {
     loading.value = true
     return
@@ -208,7 +207,8 @@ async function getRankListDialog() {
             </template>
           </v-dialog>
           <v-toolbar-title class="text-h6 text-center">
-            Stage {{ gameData.stage }}
+            <v-chip color="primary" label>Question {{ gameData.current_question }} / {{ gameData.total_question }}</v-chip>
+             Stage {{ gameData.stage }} / {{ gameData.total_stage }}
 
             <!--            显示已提交的绿色tag-->
             <v-chip v-if="disabled" color="success" label>已提交</v-chip>
